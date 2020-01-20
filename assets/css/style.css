@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.new-day {
+    text-align: center;
+    border: 1px solid black;
+}
+.new-day > h5 {
+    margin: 15px 0;
+}
