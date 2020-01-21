@@ -16,7 +16,6 @@ window.addEventListener("load", () => {
     // Current day statistics
     var location = document.querySelector(".location-timezone");
     var degree = document.querySelector(".location-degree");
-    var cloudCov = document.querySelector(".cloud-cover")
     var rainProbability = document.querySelector(".rain-probability")
     var humidityLevel = document.querySelector(".humidity")
     var pressureLevel = document.querySelector(".pressure")
@@ -44,12 +43,10 @@ window.addEventListener("load", () => {
                         humidity,
                         pressure,
                         windSpeed,
-                        uvIndex,
-                        cloudCover } = data.currently;
+                        uvIndex } = data.currently;
 
                     location.innerHTML = data.timezone;
-                    degree.innerHTML = "Temperature: " + Math.round(temperature) + " °C // Real feel: " + Math.round(apparentTemperature) + " °C";
-                    cloudCov.innerHTML = "Clouds: " + cloudCover * 100 + " %";
+                    degree.innerHTML = Math.round(temperature) + " °C";
                     rainProbability.innerHTML = "Rain: " + (precipProbability) * 100 + " %";
                     humidityLevel.innerHTML = "Humidity: " + (humidity) * 100 + "%";
                     pressureLevel.innerHTML = "Pressure: " + pressure + " kPa";

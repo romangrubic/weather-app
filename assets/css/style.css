@@ -9,30 +9,38 @@ body {
 /* --- Today --- */
 
 .location-degree{
-    margin: 25px auto;
+    margin: 10% auto 0;
     text-align: center;
+    font-size: 8em;
+    color: rgb(255, 255, 0);
+    background-color: rgb(245, 131, 131);
+    padding: 50px;
+    border-radius: 25px
 }
 .location-timezone{
-    margin: 25px auto;
+    font-size: 5em;
+    margin: 40px auto;
     text-align: center;
 }
 .today-info{
     margin: 15px 0;
-    background-color: white;
+
 }
 .today-info > p {
     margin: 0 auto;
     border: 1px solid red;
+    border-radius: 20px;
     text-align: center;
+    background-color: white;
 }
 
 /* --- Next days --- */
 .new-day {
     text-align: center;
     border: 1px solid black;
-    background-color: white;
     border-radius: 20px;
     margin: 30px auto 0;
+    background-color: white;
 }
 .new-day > h5 {
     margin: 15px 0;
