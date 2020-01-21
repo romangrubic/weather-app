@@ -2,11 +2,42 @@
     margin: 0;
     box-sizing: border-box;
 }
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgb(173, 221, 252), rgb(54, 117, 189)) ;
+}
+/* --- Today --- */
 
+.location-degree{
+    margin: 25px auto;
+    text-align: center;
+}
+.location-timezone{
+    margin: 25px auto;
+    text-align: center;
+}
+.today-info{
+    margin: 15px 0;
+    background-color: white;
+}
+.today-info > p {
+    margin: 0 auto;
+    border: 1px solid red;
+    text-align: center;
+}
+
+/* --- Next days --- */
 .new-day {
     text-align: center;
     border: 1px solid black;
+    background-color: white;
+    border-radius: 20px;
+    margin: 30px auto 0;
 }
 .new-day > h5 {
     margin: 15px 0;
+}
+.new-day > h6 {
+    font-size: 17px;
+    margin: 10px 0;
 }

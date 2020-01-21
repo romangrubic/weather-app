@@ -1,12 +1,22 @@
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 3,
+        center: { lat: -28.024, lng: 140.887 }
+    });
+};
+
+
 window.addEventListener("load", () => {
 
     // User's location
     var long;
     var lat;
 
+
     // Current day statistics
     var location = document.querySelector(".location-timezone");
     var degree = document.querySelector(".location-degree");
+    var cloudCov = document.querySelector(".cloud-cover")
     var rainProbability = document.querySelector(".rain-probability")
     var humidityLevel = document.querySelector(".humidity")
     var pressureLevel = document.querySelector(".pressure")
@@ -34,32 +44,44 @@ window.addEventListener("load", () => {
                         humidity,
                         pressure,
                         windSpeed,
-                        uvIndex } = data.currently;
+                        uvIndex,
+                        cloudCover } = data.currently;
 
                     location.innerHTML = data.timezone;
                     degree.innerHTML = "Temperature: " + Math.round(temperature) + " °C // Real feel: " + Math.round(apparentTemperature) + " °C";
-                    /*rainProbability.innerHTML = "Chance of rain: " + (precipProbability) * 100 + " %";
+                    cloudCov.innerHTML = "Clouds: " + cloudCover * 100 + " %";
+                    rainProbability.innerHTML = "Rain: " + (precipProbability) * 100 + " %";
                     humidityLevel.innerHTML = "Humidity: " + (humidity) * 100 + "%";
                     pressureLevel.innerHTML = "Pressure: " + pressure + " kPa";
-                    windSpeedLevel.innerHTML = "Wind speed: " + windSpeed + " km/h";
-                    uvIndexLevel.innerHTML = "UV index: " + uvIndex;*/
+                    windSpeedLevel.innerHTML = "Wind: " + windSpeed + " km/h";
+                    uvIndexLevel.innerHTML = "UV index: " + uvIndex;
+
 
                     // This section creates for next 6days forecast (Total of 7days)
-                    for (i = 0; i < 6; i++) {
+                    for (i = 0; i < 3; i++) {
                         const { summary,
                             temperatureHigh,
                             temperatureLow,
                             precipProbability,
                             humidity,
                             pressure,
-                            windSpeed} = data.daily.data[i];
+                            windSpeed,
+                            time } = data.daily.data[i];
 
                         console.log(data.daily.data[i])
 
                         var div = document.createElement("div");
-                        div.setAttribute('id' , id=["newday" + i] )
-                        div.setAttribute('class', 'col-2 new-day');
+                        div.setAttribute('id', ["newday" + i])
+                        div.setAttribute('class', 'col-3 new-day');
                         document.getElementById("nextday").appendChild(div);
+                        var h6 = document.createElement("h6")
+                        var date = new Date(time*1000);
+                        var nDate = date.toDateString();
+                        var day = nDate.slice(0, 3);
+                        var number = nDate.slice(4, 10);
+                        var nDate = day + ", " + number;
+                        h6.innerHTML = nDate ;
+                        div.appendChild(h6);
                         var h5 = document.createElement("h5");
                         h5.innerHTML = summary;
                         div.appendChild(h5);
@@ -67,29 +89,17 @@ window.addEventListener("load", () => {
                         par.innerHTML = " Temperature <br> Max: " + Math.round(temperatureHigh) + "  °C <br> Min: " + Math.round(temperatureLow) + " °C";
                         div.appendChild(par);
                         var parPrecipitation = document.createElement("p")
-                        parPrecipitation.innerHTML = "Rain: " + Math.round(precipProbability*100) + " %"
+                        parPrecipitation.innerHTML = "Rain: " + Math.round(precipProbability * 100) + " %"
                         div.appendChild(parPrecipitation);
-                        var btn = document.createElement("button");
-                        btn.setAttribute('id', id=["more-data"+ i] );
-                        btn.innerHTML = "More data";       
-                        div.appendChild(btn);
-                        var parHumidity = document.createElement("p")
-                        parHumidity.setAttribute('id', id=["parHumidity"+i]);
-                        parHumidity.innerHTML = "Humidity: " + Math.round(humidity*100) + " %"
-                        div.appendChild(parHumidity);
-                        var parPressure = document.createElement("p")
-                        parPressure.innerHTML = "Pressure: " + Math.round(pressure) + " kPa"
-                        div.appendChild(parPressure);
-                        var parWindSpeed = document.createElement("p")
-                        parWindSpeed.innerHTML = "Wind speed: " + windSpeed + " m/s"
-                        div.appendChild(parWindSpeed);
-                        
                     };
                 });
-
         })
     } else {
         console.log("Geolocation denied!")
     }
+
+
 });
+
+
 
